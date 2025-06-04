@@ -29,6 +29,9 @@ export const columns: ColumnDef<Scholarship>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => (
+      <span className="underline">{row.getValue("title")}</span>
+    ),
   },
 
   {

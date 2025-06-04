@@ -12,7 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import SpotlightBorderWrapper from "@/components/ui/border";
 import { Ring } from "ldrs/react";
 import "ldrs/react/Ring.css";
@@ -66,7 +66,7 @@ export function DataTable<TData extends { id: string }, TValue>({
       sorting,
     },
   });
-  const router = useRouter();
+
   return (
     <>
       <div className="flex items-center py-4 gap-3">
@@ -155,19 +155,18 @@ export function DataTable<TData extends { id: string }, TValue>({
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
                     className="cursor-pointer"
-                    onClick={() => {
-                      router.push(
-                        `/administrator/home/scholarships/manage/${row.original.id}`,
-                        { scroll: false }
-                      );
-                    }}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
+                        <Link
+                          href={`/administrator/home/scholarships/manage/${row.original.id}`}
+                          prefetch={true}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </Link>
                       </TableCell>
                     ))}
                   </TableRow>

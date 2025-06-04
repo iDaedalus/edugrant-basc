@@ -1,6 +1,7 @@
 "use client";
 import create from "@/assets/create.svg";
 import browse from "@/assets/browse.svg";
+import Link from "next/link";
 import apply from "@/assets/apply.svg";
 import { ModeToggle } from "@/components/ui/dark-mode";
 import track from "@/assets/track.svg";
@@ -18,7 +19,6 @@ import {
   Mail,
   HelpCircle,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import bascLogo from "@/assets/basclogo.png";
 import bascImage from "@/assets/BASCjf5989_03 copy.jpg";
 import { motion } from "framer-motion";
@@ -97,7 +97,6 @@ const howItWorks = [
 ];
 
 export default function LandingPage() {
-  const router = useRouter();
   return (
     <>
       <div className="relative w-full your-class ">
@@ -132,9 +131,11 @@ export default function LandingPage() {
             </ul>
           </span>
           <span className="flex gap-3 items-center">
-            <Button onClick={() => router.push("/login")}>
-              Login <LogInIcon />
-            </Button>
+            <Link href={"/login"} prefetch={true}>
+              <Button>
+                Login <LogInIcon />
+              </Button>
+            </Link>
             <ModeToggle />
           </span>
         </header>
@@ -177,9 +178,11 @@ export default function LandingPage() {
             </span>
           </p>
           <span className="mt-10">
-            <Button onClick={() => router.push("/register")}>
-              Get started <ArrowRight />
-            </Button>
+            <Link href={"/register"} prefetch={true}>
+              <Button>
+                Get started <ArrowRight />
+              </Button>
+            </Link>
           </span>
         </div>
 
@@ -214,19 +217,16 @@ export default function LandingPage() {
             </span>
           </p>
           <div className="flex gap-3 mt-8">
-            <Button
-              onClick={() => router.push("/register")}
-              variant="outline"
-              className="flex-1 py-5"
-            >
-              Apply Now <ArrowRight />
-            </Button>
-            <Button
-              onClick={() => router.push("/login")}
-              className="flex-1 py-5"
-            >
-              Continue <LogIn />
-            </Button>
+            <Link href={"/register"} prefetch={true}>
+              <Button variant="outline" className="flex-1 py-5">
+                Apply Now <ArrowRight />
+              </Button>
+            </Link>
+            <Link href={"/login"} prefetch={true}>
+              <Button className="flex-1 py-5">
+                Login <LogIn />
+              </Button>
+            </Link>
           </div>
         </div>
 
