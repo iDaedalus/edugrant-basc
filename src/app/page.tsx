@@ -12,6 +12,11 @@ import {
   Menu,
   MessageCircleQuestion,
   MonitorCog,
+  Home,
+  Sparkles,
+  Settings,
+  Mail,
+  HelpCircle,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import bascLogo from "@/assets/basclogo.png";
@@ -26,7 +31,13 @@ import {
 import { Button } from "@/components/ui/button";
 import SpotlightBorderWrapper from "@/components/ui/border";
 import { Separator } from "@/components/ui/separator";
-const navItems = ["Home", "Features", "How it works", "Contact", "Faqs"];
+const navItems = [
+  { label: "Home", icon: Home },
+  { label: "Features", icon: Sparkles },
+  { label: "How it works", icon: Settings },
+  { label: "Contact", icon: Mail },
+  { label: "Faqs", icon: HelpCircle },
+];
 const faqs = [
   {
     value: "item-1",
@@ -97,20 +108,25 @@ export default function LandingPage() {
               <p className="font-semibold text-xl ">basc edugrant</p>
             </span>
             <Separator orientation="vertical" />
-            <ul className="flex ">
+            <ul className="flex gap-2">
               {navItems.map((item, index) => (
                 <li
+                  key={index}
                   onClick={() => {
-                    const sectionId = item.toLowerCase().replace(/\s+/g, "-");
+                    const sectionId = item.label
+                      .toLowerCase()
+                      .replace(/\s+/g, "-");
                     const section = document.getElementById(sectionId);
                     if (section) {
                       section.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  className=" cursor-pointer"
-                  key={index}
+                  className=" flex items-center"
                 >
-                  <Button variant="link">{item}</Button>
+                  <Button variant="link" className="cursor-pointer">
+                    <item.icon className="w-4 h-4" />
+                    {item.label}
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -125,7 +141,7 @@ export default function LandingPage() {
 
         <div className="relative h-[75vh] w-[95%] mx-auto justify-center items-start flex-col border rounded-3xl p-10 overflow-hidden bg-[var(--green)] hidden lg:flex shadow-md">
           <img
-            className="absolute opacity-3 h-[120%] [mask-image:linear-gradient(to_right,transparent,black_30%)] "
+            className="absolute opacity-3 h-[120%] [mask-image:linear-gradient(to_right,transparent,black_30%)] pointer-events-none"
             src={bascLogo.src}
             alt=""
           />
