@@ -1,13 +1,21 @@
 "use client";
-import phone from "@/assets/edu-basc.vercel.app_administrator_home_scholarships_manage-portrait.png";
 import create from "@/assets/create.svg";
 import browse from "@/assets/browse.svg";
 import apply from "@/assets/apply.svg";
 import { ModeToggle } from "@/components/ui/dark-mode";
 import track from "@/assets/track.svg";
-import { ArrowRight, LogIn, Menu } from "lucide-react";
+import Footer from "./footer";
+import {
+  ArrowRight,
+  LogIn,
+  LogInIcon,
+  Menu,
+  MessageCircleQuestion,
+  MonitorCog,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import bascLogo from "@/assets/basclogo.png";
+import bascImage from "@/assets/BASCjf5989_03 copy.jpg";
 import { motion } from "framer-motion";
 import {
   Accordion,
@@ -16,6 +24,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import SpotlightBorderWrapper from "@/components/ui/border";
+import { Separator } from "@/components/ui/separator";
+const navItems = ["Home", "Features", "How it works", "Contact", "Faqs"];
 const faqs = [
   {
     value: "item-1",
@@ -79,14 +90,91 @@ export default function LandingPage() {
   return (
     <>
       <div className="relative w-full your-class ">
-        <div className="flex justify-between items-center w-full px-4 pt-2">
+        <header className="py-8 w-[95%] mx-auto hidden lg:flex justify-between items-center">
+          <span className="flex items-center gap-5 h-15 py-3">
+            <span className="flex items-center gap-2">
+              <img className="h-10 w-10" src={bascLogo.src} alt="" />
+              <p className="font-semibold text-xl ">basc edugrant</p>
+            </span>
+            <Separator orientation="vertical" />
+            <ul className="flex ">
+              {navItems.map((item, index) => (
+                <li
+                  onClick={() => {
+                    const sectionId = item.toLowerCase().replace(/\s+/g, "-");
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                      section.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className=" cursor-pointer"
+                  key={index}
+                >
+                  <Button variant="link">{item}</Button>
+                </li>
+              ))}
+            </ul>
+          </span>
+          <span className="flex gap-3 items-center">
+            <Button onClick={() => router.push("/login")}>
+              Login <LogInIcon />
+            </Button>
+            <ModeToggle />
+          </span>
+        </header>
+
+        <div className="relative h-[75vh] w-[95%] mx-auto justify-center items-start flex-col border rounded-3xl p-10 overflow-hidden bg-[var(--green)] hidden lg:flex shadow-md">
+          <img
+            className="absolute opacity-3 h-[120%] [mask-image:linear-gradient(to_right,transparent,black_30%)] "
+            src={bascLogo.src}
+            alt=""
+          />
+          <img
+            className="h-full w-[40%] object-cover absolute right-0 [mask-image:linear-gradient(to_right,transparent,black)] z-10"
+            src={bascImage.src}
+            alt=""
+          />
+          <div className=" flex items-start ">
+            <motion.span
+              className="bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-[length:200%_100%] bg-clip-text  text-green-500/70 
+  text-6xl font-semibold zxczxc tracking-[-7px] 
+  "
+              initial={{ backgroundPosition: "200% 0" }}
+              animate={{ backgroundPosition: "-200% 0" }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 7,
+                ease: "linear",
+              }}
+            >
+              Edugrant
+            </motion.span>
+            <p className="text-center mt-1 text-lg text-white">
+              &nbsp;Online Scholarship Application Portal
+            </p>
+          </div>
+          <p className="mt-5 font-light text-xl px-1 text-white">
+            Apply, track, and get notified — all in one place for{" "}
+            <span className="text-yellow-400 font-semibold">
+              BASC students.
+            </span>
+          </p>
+          <span className="mt-10">
+            <Button onClick={() => router.push("/register")}>
+              Get started <ArrowRight />
+            </Button>
+          </span>
+        </div>
+
+        <div className="lg:hidden flex justify-between items-center w-full px-4 pt-2">
           <img className=" h-12 w-12" src={bascLogo.src} alt="BASC Logo" />
           <div className="flex gap-2 items-center">
             <ModeToggle />
             <Menu className=" h-8 w-8" />
           </div>
         </div>
-        <div className="p-4 mt-10">
+        <div className="p-4 mt-10 lg:hidden block">
           <motion.span
             className="bg-[linear-gradient(110deg,#404040,35%,#fff,50%,#404040,75%,#404040)] bg-[length:200%_100%] bg-clip-text  text-green-500/70 
             text-4xl font-semibold zxczxc tracking-[-5px] 
@@ -103,10 +191,6 @@ export default function LandingPage() {
             Edugrant
           </motion.span>
 
-          {/* <p className="text-center mt-1 text-lg">
-            {" "}
-            Online Scholarship Application Portal
-          </p> */}
           <p className="mt-5 font-light px-1">
             Apply, track, and get notified — all in one place for{" "}
             <span className="text-yellow-400 font-semibold">
@@ -128,53 +212,58 @@ export default function LandingPage() {
               Continue <LogIn />
             </Button>
           </div>
-
-          <div className="relative mt-20 overflow-hidden border-b-2 h-[50vh] ">
-            <img
-              className="absolute top-0 scale-125 translate-y-10 w-full object-cover"
-              src={phone.src}
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="p-4 mt-10">
-          <h1 className="font-semibold zxczxc tracking-[-3px] mb-3">
-            How It Works
-          </h1>
-          <div className="grid md:grid-cols-2 gap-6">
-            {howItWorks.map((step, index) => (
-              <div
-                key={index}
-                className="p-4 border rounded-lg shadow-sm flex flex-col sm:flex-row items-start gap-4"
-              >
-                <img
-                  src={step.image}
-                  alt={step.title}
-                  className="w-full h-40  object-cover rounded-md"
-                />
-                <div>
-                  <h3 className="text-lg font-medium">{step.title}</h3>
-                  <p className="text-sm mt-1 text-muted-foreground">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="mt-4 p-4 mb-3">
-          <h1 className="font-semibold zxczxc tracking-[-3px]">
-            Frequently Ask Questions
-          </h1>
-          <Accordion type="single" collapsible>
-            {faqs.map((faq) => (
-              <AccordionItem key={faq.value} value={faq.value}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <div className="p-4 lg:w-3/4 mx-auto  space-y-15 mt-10">
+          <div className="space-y-8">
+            <h1
+              id="how-it-works"
+              className="font-semibold text-xl border-l-4 border-green-600 pl-5 flex items-center gap-2"
+            >
+              How It Works <MonitorCog />
+            </h1>
+            <div className="grid md:grid-cols-2 gap-6">
+              {howItWorks.map((step, index) => (
+                <SpotlightBorderWrapper key={index}>
+                  <div className="p-4 border rounded-lg shadow-sm flex flex-col sm:flex-row items-start gap-4 backdrop:backdrop-blur-2xl bg-muted-foreground/5">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-40  object-cover rounded-md"
+                    />
+                    <div>
+                      <h3 className="text-lg font-medium">{step.title}</h3>
+                      <p className="text-sm mt-1 text-muted-foreground">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                </SpotlightBorderWrapper>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-5">
+            <h1
+              id="faqs"
+              className="font-semibold text-xl border-l-4 border-green-600 pl-5 flex items-center gap-2"
+            >
+              Frequently Ask Questions <MessageCircleQuestion />
+            </h1>
+            <Accordion type="single" collapsible>
+              {faqs.map((faq) => (
+                <AccordionItem key={faq.value} value={faq.value}>
+                  <AccordionTrigger className="!py-8">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent>{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+          <div className="px-4 pb-10 lg:w-3/4 mx-auto">
+            <Footer />
+          </div>
         </div>
       </div>
     </>
