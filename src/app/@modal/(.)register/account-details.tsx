@@ -13,7 +13,7 @@ type Props = {
   errors: FieldErrors<registerData>;
   control: Control<registerData>;
 };
-export default function AccountDetails({ register, errors, control }: Props) {
+export default function AccountDetails({ register, errors }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 30 }}

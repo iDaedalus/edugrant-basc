@@ -176,7 +176,7 @@ export default function PersonalDetails({ register, errors, control }: Props) {
                           <CommandItem
                             key={gender.value}
                             value={gender.value}
-                            onSelect={(val) => {
+                            onSelect={() => {
                               field.onChange(gender.value);
                               setOpen((prev) => ({ ...prev, gender: false }));
                             }}
