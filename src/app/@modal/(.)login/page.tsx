@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
+import { X } from "lucide-react";
 export default function LoginClient() {
   const router = useRouter();
   const [open, setOpen] = useState(true);
@@ -31,7 +32,7 @@ export default function LoginClient() {
 
   return (
     <Drawer direction="right" open={open} onOpenChange={setOpen}>
-      <DrawerContent >
+      <DrawerContent>
         <div className=" mt-15 px-4">
           <DrawerHeader>
             <DrawerTitle className="text-2xl tracking-[-3px] zxczxc text-center">
@@ -60,10 +61,33 @@ export default function LoginClient() {
           </div>
 
           <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
+            <div className="text-xs text-center text-gray-600 mt-2">
+              By logging in, you agree to our{" "}
+              <a
+                href="/terms"
+                target="_blank"
+                className="underline text-blue-600"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                href="/privacy"
+                target="_blank"
+                className="underline text-blue-600"
+              >
+                Privacy Policy
+              </a>
+              .
+            </div>
+            <div className="flex gap-2">
+              <Button className="flex-1">Submit</Button>
+              <DrawerClose asChild>
+                <Button variant="outline">
+                  <X />
+                </Button>
+              </DrawerClose>
+            </div>
             <div className="flex justify-center items-center py-5">
               <Label>
                 Dont&apos; have an account?{" "}
